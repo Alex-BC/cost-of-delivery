@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Тест</title>
+<style type="text/css">
+	html,
+	body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+	#container {
+		height: 100%;
+		display: flex;
+	}
+
+	#sidebar {
+		flex-basis: 15rem;
+		flex-grow: 1;
+		padding: 1rem;
+		max-width: 30rem;
+		height: 100%;
+		box-sizing: border-box;
+		overflow: auto;
+	}
+
+	#map {
+		flex-basis: 0;
+		flex-grow: 4;
+		height: 100%;
+	}
+
+	#floating-panel {
+		position: absolute;
+		top: 10px;
+		left: 25%;
+		z-index: 5;
+		background-color: #fff;
+		padding: 5px;
+		border: 1px solid #999;
+		text-align: center;
+		font-family: "Roboto", "sans-serif";
+		line-height: 30px;
+		padding-left: 10px;
+	}
+
+	#floating-panel {
+		background-color: #fff;
+		border: 0;
+		border-radius: 2px;
+		box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+		margin: 10px;
+		padding: 0 0.5em;
+		font: 400 18px Roboto, Arial, sans-serif;
+		overflow: hidden;
+		padding: 5px;
+		font-size: 14px;
+		text-align: center;
+		line-height: 30px;
+		height: auto;
+	}
+
+	#map {
+		flex: auto;
+	}
+
+	#sidebar {
+		flex: 0 1 auto;
+		padding: 0;
+	}
+	#sidebar > div {
+		padding: 0.5rem;
+	}
+</style>
+<script type="text/javascript">
+
+	const polygons = [
+	  {
+		id: 1,
+		name: "Київ",
+		polygon_coords: [
+		  {
+			lat: 50.41336456065911,
+			lng: 30.274834782410526
+		  },
+		  {
+			lat: 50.487691527544065,
+			lng: 30.261101872254276
+		  },
+		  {
+			lat: 50.56713572180551,
+			lng: 30.359978825379276
+		  },
+		  {
+			lat: 50.56015697902436,
+			lng: 30.5755855148324
+		  },
+		  {
+			lat: 50.54968692697855,
+			lng: 30.730767399598026
+		  },
+		  {
+			lat: 50.39148146394909,
+			lng: 30.722527653504276
+		  },
+		  {
+			lat: 50.33716777796403,
+			lng: 30.612664372254276
+		  },
+		  {
+			lat: 50.32907342756105,
+			lng: 30.40199935118932
+		  }
+		],
+		main_point: {
+		  lat: 50.423379666714204,
+		  lng: 30.565465194825936
+		},
+		main_price: 250,
+		price_per_km: 5
+	  },
+	  {
+		id: 2,
+		name: "БЦ",
+		polygon_coords: [
+		  {
+			lat: 49.82749223753116,
+			lng: 30.04261198511439
+		  },
+		  {
+			lat: 49.77696970092556,
+			lng: 30.05085173120814
+		  },
+		  {
+			lat: 49.76543963325659,
+			lng: 30.129129319098766
+		  },
+		  {
+			lat: 49.769874599270665,
+			lng: 30.208780198005016
+		  },
+		  {
+			lat: 49.79558940098191,
+			lng: 30.21564665308314
+		  },
+		  {
+			lat: 49.82837812725975,
+			lng: 30.13874235620814
+		  }
+		],
+		main_point: {
+		  lat: 49.802981117592346,
+		  lng: 30.123705715687187
+		},
+		main_price: 90,
+		price_per_km: 4
+	  },
+	  {
+		id: 3,
+		name: "Фастів'",
+		polygon_coords: [
+		  {
+			lat: 50.121236369142444,
+			lng: 29.83503876860146
+		  },
+		  {
+			lat: 50.03839719693367,
+			lng: 29.83503876860146
+		  },
+		  {
+			lat: 50.01898863204859,
+			lng: 29.92018281157021
+		  },
+		  {
+			lat: 50.07013975025288,
+			lng: 29.990220653367086
+		  },
+		  {
+			lat: 50.10714619258948,
+			lng: 29.99708710844521
+		  },
+		  {
+			lat: 50.1344421441868,
+			lng: 29.962754833054586
+		  },
+		  {
+			lat: 50.13620263888454,
+			lng: 29.91194306547646
+		  }
+		],
+		main_point: {
+		  lat: 50.07904188790587,
+		  lng: 29.91401038036094
+		},
+		main_price: 200,
+		price_per_km: 5
+	  }
+	] ;
+	
+	function initAutocomplete() {
+			const map = new google.maps.Map(document.getElementById("map"), {
+		zoom: 10,
+		center: { lat: 49.80298, lng: 30.12370},
+		mapTypeId: "terrain",
+			});
+
+			polygons.forEach(function (item, index, array) {
+
+		  const polygon = new google.maps.Polygon({
+			paths: item.polygon_coords,
+			strokeColor: "blue",
+			strokeOpacity: 0.8,
+			strokeWeight: 2,
+			fillColor: "blue",
+			fillOpacity: 0.20,
+		  });
+		 
+
+		  new google.maps.Marker({
+			position: item.main_point,
+			map,
+			title: item.name,
+		  });
+
+		  polygon.setMap(map);
+			
+		})	
+		
+			// Создаем поле поиска и связываем его с элементом пользовательского интерфейса.
+			const input = document.getElementById("pac-input");
+			const searchBox = new google.maps.places.SearchBox(input);
+
+			map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+			// Смещает результаты SearchBox к области просмотра текущей карты.
+			map.addListener("bounds_changed", () => {
+				searchBox.setBounds(map.getBounds());
+			});
+
+			let markers = [];
+			// 	  // Слушаем событие, срабатывающее, когда пользователь выбирает прогноз, и получаем
+			//   // подробнее об этом месте.
+			searchBox.addListener("places_changed", () => {
+				const places = searchBox.getPlaces();
+
+				if (places.length == 0) {
+					return;
+				}
+
+				// Удаляем старые маркеры.
+				markers.forEach((marker) => {
+					marker.setMap(null);
+				});
+				markers = [];
+
+				// Для каждого места получить значок, название и местоположение.
+				const bounds = new google.maps.LatLngBounds();
+
+				places.forEach((place) => {
+					if (!place.geometry || !place.geometry.location) {
+						console.log("Returned place contains no geometry");
+						return;
+					}
+
+					const icon = {
+						url: place.icon,
+						size: new google.maps.Size(71, 71),
+						origin: new google.maps.Point(0, 0),
+						anchor: new google.maps.Point(17, 34),
+						scaledSize: new google.maps.Size(25, 25),
+					};
+
+					// Create a marker for each place.
+					markers.push(
+						new google.maps.Marker({
+							map,
+							icon,
+							title: place.name,
+							position: place.geometry.location,
+						})
+					);
+					if (place.geometry.viewport) {
+						// Only geocodes have viewport.
+						bounds.union(place.geometry.viewport);
+					} else {
+						bounds.extend(place.geometry.location);
+					}
+				});
+				map.fitBounds(bounds);
+				
+			});
+			
+			function calcDistance(fromLat, fromLng, toLat, toLng) {
+			return console.log(google.maps.geometry.spherical.computeDistanceBetween(
+					new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(toLat, toLng)));
+					
+		}
+		// 	function calcDistance(fromLat, fromLng, toLat, toLng) {
+		// 	return console.log(google.maps.geometry.spherical.computeDistanceBetween(
+		// 		new google.maps.LatLng(polygons[1].polygon_coords[1]), new google.maps.LatLng(polygons[2].polygon_coords[1])));				
+
+		// }
+		calcDistance()
+		// console.log(calcDistance(polygons.polygon_coords, polygons.polygon_coords))
+		// console.log(polygons[1].polygon_coords)
+		
+		}
+		
+</script>
+</head>
+<body>
+
+	<input id="pac-input" class="controls" type="text" placeholder="Search Box" />
+	
+<div id="container">
+	<div id="map"></div>
+	<div id="sidebar"></div>
+	
+</div>
+
+<script
+	
+	src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDQNvOfjIQesakm9YIHYv7wSIr4PSeWmWI&callback=initAutocomplete&libraries=places,geometry&v=weekly"
+	async></script>
+
+</body>
+</html>
