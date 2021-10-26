@@ -290,23 +290,59 @@
 				map.fitBounds(bounds);
 				
 			});
-			
-			function calcDistance(fromLat, fromLng, toLat, toLng) {
-			return console.log(google.maps.geometry.spherical.computeDistanceBetween(
-					new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(toLat, toLng)));
-					
-		}
-		// 	function calcDistance(fromLat, fromLng, toLat, toLng) {
+		// 	const coords = polygons.map(polygon => polygon.polygon_coords);
+		// console.log(coords);
+
+	
+
+	// function calcDistance(fromLat, fromLng, toLat, toLng) {
+	// 		return console.log(google.maps.geometry.spherical.computeDistanceBetween(
+	// 			new google.maps.LatLng(coords[1]), new google.maps.LatLng(coords[2])));
+
+	// 	}
+
+		// function calcDistance(fromLat, fromLng, toLat, toLng) {
 		// 	return console.log(google.maps.geometry.spherical.computeDistanceBetween(
-		// 		new google.maps.LatLng(polygons[1].polygon_coords[1]), new google.maps.LatLng(polygons[2].polygon_coords[1])));				
+		// 		new google.maps.LatLng(polygons[1].polygon_coords[1]), new google.maps.LatLng(polygons[2].polygon_coords[1])));
 
 		// }
-		calcDistance()
-		// console.log(calcDistance(polygons.polygon_coords, polygons.polygon_coords))
-		// console.log(polygons[1].polygon_coords)
+
+		// calcDistance()	
 		
 		}
 		
+	const coords = polygons.map(polygon => polygon.polygon_coords);
+	console.log(coords)
+
+	// const final = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(fromLat, fromLng));
+    // console.log(final);
+
+	// function calcDistance(fromLat, fromLng, toLat, toLng) {
+	// 			return google.maps.geometry.spherical.computeDistanceBetween(
+	// 				new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(toLat, toLng));
+
+	// 		}
+
+	// function calcDistance(fromLat, fromLng, toLat, toLng) {
+	// 	return console.log(google.maps.geometry.spherical.computeDistanceBetween(
+	// 		new google.maps.LatLng(polygons[1].polygon_coords[1]), new google.maps.LatLng(polygons[2].polygon_coords[1])));				
+
+	// 		}
+
+	
+		// console.log(calcDistance(polygons.polygon_coords, polygons.polygon_coords))
+		// console.log(polygons)
+
+	// polygons.forEach(polygon => console.log(polygon))	
+
+	
+	
+	// const input = document.getElementById("pac-input");
+	// console.log(input)
+	// calcDistance()
+
+
+
 </script>
 </head>
 <body>
