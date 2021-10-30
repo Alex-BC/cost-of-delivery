@@ -232,7 +232,6 @@
 			const searchBox = new google.maps.places.SearchBox(input);
 
 			map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
 			// Смещает результаты SearchBox к области просмотра текущей карты.
 			map.addListener("bounds_changed", () => {
 				searchBox.setBounds(map.getBounds());
@@ -288,6 +287,8 @@
 					}
 				});
 				map.fitBounds(bounds);
+
+
 				
 			});
 		// 	const coords = polygons.map(polygon => polygon.polygon_coords);
@@ -301,20 +302,20 @@
 
 	// 	}
 
-		function calcDistance(fromLat, fromLng, toLat, toLng) {
-			return console.log(google.maps.geometry.spherical.computeDistanceBetween(
-				new google.maps.LatLng(polygons[1].polygon_coords[1]), new google.maps.LatLng(polygons[2].polygon_coords[1])));
+		// function calcDistance(fromLat, fromLng, toLat, toLng) {
+		// 	return console.log(google.maps.geometry.spherical.computeDistanceBetween(
+		// 		new google.maps.LatLng(polygons[1].polygon_coords[1]), new google.maps.LatLng(polygons[2].polygon_coords[1])));
 
-		}
+		// }
 
-		calcDistance()	
+		// calcDistance()	
 		
 		}
-		
-	// const coords = polygons.map(polygon => polygon.polygon_coords);
-	// console.log(coords)
-	// const final = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(fromLat, fromLng));
-    // console.log(final);
+
+
+		// const coords = polygons.forEach(polygon => console.log(polygon.polygon_coords));
+		// const coords2 = polygons.map(polygon => console.log(polygon.polygon_coords));
+	
 
 	// function calcDistance(fromLat, fromLng, toLat, toLng) {
 	// 			return google.maps.geometry.spherical.computeDistanceBetween(
@@ -323,23 +324,17 @@
 	// 		}
 
 	function calcDistance(fromLat, fromLng, toLat, toLng) {
+
+		const coords = polygons.forEach(polygon => console.log(polygon.polygon_coords));
+		// const coords = polygons.forEach(polygon => polygon.polygon_coords);
+		// const target = 
+
 		return console.log(google.maps.geometry.spherical.computeDistanceBetween(
-			new google.maps.LatLng(polygons[1].polygon_coords[1]), new google.maps.LatLng(polygons[2].polygon_coords[1])));				
+			// new google.maps.LatLng(polygons[1].polygon_coords[1]), new google.maps.LatLng(polygons[2].polygon_coords[1])));			
+				new google.maps.LatLng(coords), new google.maps.LatLng(polygons[2].polygon_coords[1])));	
+		
 
 			}
-
-	calcDistance()
-		// console.log(calcDistance(polygons.polygon_coords, polygons.polygon_coords))
-		// console.log(polygons)
-
-	// polygons.forEach(polygon => console.log(polygon))	
-
-	
-	
-	// const input = document.getElementById("pac-input");
-	// console.log(input)
-	// calcDistance()
-
 
 
 </script>
@@ -348,6 +343,8 @@
 
 	<input id="pac-input" class="controls" type="text" placeholder="Search Box" />
 	
+	<input type="button" onclick="calcDistance()" value="Найти ближайший полигон">
+
 <div id="container">
 	<div id="map"></div>
 	<div id="sidebar"></div>
