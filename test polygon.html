@@ -198,6 +198,8 @@
 	  }
 	] ;
 	
+	let marker = [];
+
 	function initAutocomplete() {
 			const map = new google.maps.Map(document.getElementById("map"), {
 		zoom: 10,
@@ -237,7 +239,7 @@
 				searchBox.setBounds(map.getBounds());
 			});
 
-			let markers = [];
+			
 			// 	  // Слушаем событие, срабатывающее, когда пользователь выбирает прогноз, и получаем
 			//   // подробнее об этом месте.
 			searchBox.addListener("places_changed", () => {
@@ -248,10 +250,10 @@
 				}
 
 				// Удаляем старые маркеры.
-				markers.forEach((marker) => {
+				marker.forEach((marker) => {
 					marker.setMap(null);
 				});
-				markers = [];
+				marker = [];
 
 				// Для каждого места получить значок, название и местоположение.
 				const bounds = new google.maps.LatLngBounds();
@@ -271,7 +273,7 @@
 					};
 
 					// Create a marker for each place.
-					markers.push(
+					marker.push(
 						new google.maps.Marker({
 							map,
 							icon,
@@ -291,31 +293,10 @@
 
 				
 			});
-		// 	const coords = polygons.map(polygon => polygon.polygon_coords);
-		// console.log(coords);
-
-	
-
-	// function calcDistance(fromLat, fromLng, toLat, toLng) {
-	// 		return console.log(google.maps.geometry.spherical.computeDistanceBetween(
-	// 			new google.maps.LatLng(coords[1]), new google.maps.LatLng(coords[2])));
-
-	// 	}
-
-		// function calcDistance(fromLat, fromLng, toLat, toLng) {
-		// 	return console.log(google.maps.geometry.spherical.computeDistanceBetween(
-		// 		new google.maps.LatLng(polygons[1].polygon_coords[1]), new google.maps.LatLng(polygons[2].polygon_coords[1])));
-
-		// }
-
-		// calcDistance()	
+		
 		
 		}
 
-
-		// const coords = polygons.forEach(polygon => console.log(polygon.polygon_coords));
-		// const coords2 = polygons.map(polygon => console.log(polygon.polygon_coords));
-	
 
 	// function calcDistance(fromLat, fromLng, toLat, toLng) {
 	// 			return google.maps.geometry.spherical.computeDistanceBetween(
@@ -323,18 +304,17 @@
 
 	// 		}
 
-	function calcDistance(fromLat, fromLng, toLat, toLng) {
-
-		const coords = polygons.forEach(polygon => console.log(polygon.polygon_coords));
-		// const coords = polygons.forEach(polygon => polygon.polygon_coords);
-		// const target = 
-
-		return console.log(google.maps.geometry.spherical.computeDistanceBetween(
-			// new google.maps.LatLng(polygons[1].polygon_coords[1]), new google.maps.LatLng(polygons[2].polygon_coords[1])));			
-				new google.maps.LatLng(coords), new google.maps.LatLng(polygons[2].polygon_coords[1])));	
+	if (marker) {
 		
+			function calcDistance(fromLat, fromLng, toLat, toLng) {
 
-			}
+			polygons.forEach(polygon => polygon.polygon_coords.forEach(coords => 
+			console.log(google.maps.geometry.spherical.computeDistanceBetween(
+				new google.maps.LatLng(marker), new google.maps.LatLng(coords)))));
+
+		}
+	} 
+
 
 
 </script>
