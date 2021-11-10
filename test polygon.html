@@ -294,7 +294,12 @@
 				
 			});
 		
-		
+		google.maps.event.addListener(map, "rightclick", function (event) {
+			var lat = event.latLng.lat();
+			var lng = event.latLng.lng();
+			// populate yor box/field with lat, lng
+			alert("Lat=" + lat + "; Lng=" + lng);
+		});
 		}
 
 
@@ -304,19 +309,39 @@
 
 	// 		}
 
-	if (marker) {
+	// if (!isEmpty(marker)) {
 		
-			function calcDistance(fromLat, fromLng, toLat, toLng) {
+	// 		function calcDistance(fromLat, fromLng, toLat, toLng) {
 
-			polygons.forEach(polygon => polygon.polygon_coords.forEach(coords => 
-			console.log(google.maps.geometry.spherical.computeDistanceBetween(
-				new google.maps.LatLng(marker), new google.maps.LatLng(coords)))));
+	// 		polygons.forEach(polygon => polygon.polygon_coords.forEach(coords => 
+	// 		console.log(google.maps.geometry.spherical.computeDistanceBetween(
+	// 			new google.maps.LatLng(marker), new google.maps.LatLng(coords)))));
 
+	// 	}
+	// } 
+
+	function calcDistance(fromLat, fromLng, toLat, toLng) {
+		if (marker.length >= 1) {
+// 			marker.forEach(i => console.log(i.position));
+// 			const e =  new google.maps.LatLng(marker.forEach(i => i.position))
+// console.log(e)
+// 			polygons.forEach(polygon => polygon.polygon_coords.forEach(coords => 
+// 			console.log(coords)));
+			
+	
+			
+			// console.log(e())
+			// console.log(marker.forEach(i => i));
+
+			// console.log(google.maps.geometry.spherical.computeDistanceBetween(
+			// 	new google.maps.LatLng(marker.forEach(i => i.position)), new google.maps.LatLng(polygons.forEach(polygon => polygon.polygon_coords.forEach(coords =>
+			// 		coords)))));
+		} else {
+			alert("Введите место назначения доставки");
 		}
-	} 
+	}
 
-
-
+	
 </script>
 </head>
 <body>
